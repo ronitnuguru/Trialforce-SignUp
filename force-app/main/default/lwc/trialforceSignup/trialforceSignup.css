@@ -1,0 +1,29 @@
+.tf-card {
+    border: 1px solid rgba(24, 24, 24, 0.04);
+    box-shadow: 0 8px 12px -2px rgb(24 24 24 / 16%);
+}
+
+.tf-card_header_icon{
+    --slds-c-icon-color-foreground-default: #0D9DDA;
+}
+
+.tf-card_title{
+    font-style: normal;
+    font-weight: 600;
+}
+
+.tf-footer{
+    background-color: #f3f3f3;
+}
+
+.tf-popover{
+    text-align: left;
+    position: absolute;
+    bottom: 35px;
+    left: -85px;
+    transform: translateX(-50%);
+}
+
+.tf-popover_header{
+    color: white;
+}

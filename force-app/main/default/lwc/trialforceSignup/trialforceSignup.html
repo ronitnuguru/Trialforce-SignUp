@@ -1,0 +1,204 @@
+<template>
+    <article class="slds-card tf-card">
+        <template if:true={displaySpinner}>
+            <lightning-spinner
+              alternative-text="Loading"
+              size="medium"
+              variant="brand"
+            ></lightning-spinner>
+        </template>
+        <div class="slds-card__header slds-grid slds-theme_shade">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate slds-m-bottom_x-small">
+                <div class="slds-media__figure">
+                    <lightning-icon
+                        icon-name="utility:salesforce1"
+                        alternative-text="Trial"
+                        title="Trial"
+                        size="large"
+                        class="tf-card_header_icon"
+                    ></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title slds-truncate_container_75">
+                    <strong class="tf-card_title slds-text-heading_small slds-truncate">{header}</strong>
+                  </h2>
+                </div>
+                <div class="slds-no-flex">
+                    <template if:true={displayQuickAction}>
+                        <template if:true={quickActionLabel}>
+                            <template if:true={quickActionURL}>
+                                <lightning-button 
+                                    label={quickActionLabel}
+                                    onclick={handleQuickActionURL}
+                                    variant="brand-outline"
+                                ></lightning-button>
+                            </template>
+                        </template>
+                    </template>
+                </div>
+            </header>
+        </div>
+      <div class="">
+        <div class="slds-m-around_medium">
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                  <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Admin User Details</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col">
+                            <lightning-input 
+                                type="text" 
+                                label="First Name"
+                                class="firstName"
+                                variant="label-stacked"
+                                max-length=40
+                                required
+                            ></lightning-input>
+                            <lightning-input 
+                                type="text" 
+                                label="Last Name"
+                                class="lastName"
+                                variant="label-stacked"
+                                max-length=80
+                                required
+                            ></lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-input 
+                                type="email" 
+                                label="Email"
+                                class="email"
+                                variant="label-stacked"
+                                required
+                            ></lightning-input>
+                            <lightning-input 
+                                type="email" 
+                                label="User Name"
+                                class="userName"
+                                variant="label-stacked"
+                                max-length=80
+                                required
+                            ></lightning-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                  <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Org Details</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col">
+                            <lightning-input 
+                                type="text" 
+                                label="Company"
+                                class="company"
+                                variant="label-stacked"
+                                max-length=80
+                                required
+                            ></lightning-input>
+                            <template if:true={displayCountry}>
+                                <lightning-combobox
+                                    name="country"
+                                    label="Country"
+                                    value={country}
+                                    placeholder="Country"
+                                    options={countryOptions}
+                                    dropdown-alignment="auto"
+                                    onchange={handleCountryChange} 
+                                ></lightning-combobox>
+                            </template>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-input 
+                                type="text" 
+                                label="My Domain"
+                                class="myDomain"
+                                variant="label-stacked"
+                                min-length=3
+                                max-length=27
+                            ></lightning-input>
+                            <template if:true={displayPreferredLanguage}>
+                                <lightning-combobox
+                                    name="preferredLanguage"
+                                    label="Preferred Language"
+                                    value={preferredLanguage}
+                                    placeholder="Preferred Language"
+                                    options={preferredLanguageOptions}
+                                    dropdown-alignment="auto"
+                                    onchange={handlePreferredLanguageChange} 
+                                ></lightning-combobox>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-modal__footer tf-footer">
+            <div class="slds-grid slds-align_absolute-center">
+                <template if:true={displayError}>
+                    <lightning-icon
+                        icon-name="utility:error" 
+                        alternative-text="Error!" 
+                        title="Error"
+                        variant="error"
+                        class="slds-m-right_x-small"
+                    ></lightning-icon>
+                </template>
+                <template if:true={displaySuccess}>
+                    <lightning-icon
+                        icon-name="utility:success"
+                        alternative-text="success"
+                        title="Success"
+                        variant="success"
+                        class="slds-m-right_x-small"
+                    ></lightning-icon>
+                </template>
+                <lightning-button 
+                    variant="brand" 
+                    label={buttonLabel}
+                    onclick={handleStartTrial}
+                    disabled={displaySpinner}
+                ></lightning-button>
+                <template if:true={displayError}>
+                    <div class="slds-is-relative">
+                        <section aria-describedby="dialog-body-id-5" aria-labelledby="dialog-heading-id-2" class="slds-popover slds-popover_error slds-nubbin_bottom-left tf-popover" role="dialog">
+                            <button class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-inverse" title="Close dialog" style="color:white">
+                                <lightning-icon
+                                    size="x-small"
+                                    icon-name="utility:close"
+                                    alternative-text="Close"
+                                    title="Close"
+                                    class="slds-current-color"
+                                    onclick={handlePopoverClose}
+                                ></lightning-icon>
+                              <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <header class="slds-popover__header">
+                              <div class="slds-media slds-media_center slds-has-flexi-truncate ">
+                                <div class="slds-media__figure">
+                                    <lightning-icon
+                                        size="small"
+                                        icon-name="utility:error"
+                                        alternative-text="error"
+                                        class="slds-current-color"
+                                    ></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                  <h2 class="slds-truncate slds-text-heading_medium tf-popover_header" title="Resolve error">Resolve Error</h2>
+                                </div>
+                              </div>
+                            </header>
+                            <div class="slds-popover__body" id="dialog-body-id-5">
+                              <p>{errorText}</p>
+                            </div>
+                        </section>
+                    </div>
+                </template>
+            </div>
+        </div>
+      </div>
+    </article>
+</template>

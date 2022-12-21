@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Trialforce Signup Request</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="header" label="Header" type="String" default="Trialforce Signup" required="true"></property>
+            <property name="buttonLabel" label="Button Label" type="String" default="START MY FREE TRIAL" required="true" ></property>
+            <property name="displayQuickAction" label="Display Quick Action" type="Boolean" default="false" description="When set to true and the Quick Action URL and label are provided, the quick action button in displayed"></property>
+            <property name="quickActionLabel" label="Quick Action Label" type="String" default="AppExchange"></property>
+            <property name="quickActionURL" label="Quick Action URL" type="String"></property>
+            <property name="templateId" label="Template Id" type="String" description="The 15-character ID of the Trialforce template that is the basis for the trial sign-up. Salesforce must approve the template. If you don’t specify an edition, a template ID is required" required="true" default="0TT..."></property>
+            <property name="trialDays" label="Trial Days" type="Integer" min="1" max="365" description="The duration of the trial sign-up in days. Must be equal to or less than the trial days for the approved Trialforce template. If not provided, it defaults to the trial duration specified for the Trialforce template"></property>
+            <property name="displayCountry" label="Display Country" type="Boolean" default="false"></property>
+            <property name="displayPreferredLanguage" label="Display Preferred Language" type="Boolean" default="false"></property>
+            <property name="isSignupEmailSuppressed" label="Suppress Signup Email" type="Boolean" default="false" description="When set to true, no sign-up emails are sent when the trial org is created. This field is used for the Proxy Signup feature"></property>
+            <property name="shouldConnectToEnvHub" label="Should Connect to Environment Hub" type="Boolean" default="false" description="When set to true, the trial org is connected to the Environment Hub. The sign-up must take place in the hub main org or a spoke org"></property>
+            <property name="signupSource" label="Signup Source" default="Trialforce" type="String" description="A user-specified description of the trial sign-up"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
