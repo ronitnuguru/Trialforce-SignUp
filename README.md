@@ -6,8 +6,4 @@ Prerequsites
 Setup
 1. Deploy the contents of the respository in your Partner Business Org (PBO)
 2. Create a Lightning Web Runtime (LWR) or Aura Experience Site
-<<<<<<< HEAD
 3. Embed the Trialforce Sign Up Ligtning Web Component (LWC) in your Experience Site
-=======
-3. Embed the Trialforce Sign Up Ligtning Web Component (LWC) in your Experience Site
->>>>>>> e38134ba389b2af15a4e174eb9ee8ed767212930

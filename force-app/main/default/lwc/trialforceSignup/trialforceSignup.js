@@ -16,7 +16,7 @@ export default class TrialforceSignup extends NavigationMixin(LightningElement) 
     @api displayPreferredLanguage;
     @api isSignupEmailSuppressed;
     @api shouldConnectToEnvHub;
-    @api signupSource;
+    @api signupSource; 
 
     preferredLanguage = 'en_US';
     country = 'US';
